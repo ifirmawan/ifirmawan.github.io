@@ -11,12 +11,18 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "deploy": "gatsby build && gh-pages -d public -b master"
   },
   "dependencies": {
-    "gatsby": "^2.26.1",
+    "autoprefixer": "^10.2.4",
+    "gatsby": "^2.32.3",
+    "gatsby-plugin-postcss": "^3.7.0",
+    "moment": "^2.29.1",
+    "postcss": "^8.2.4",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
     "prettier": "2.2.1"
