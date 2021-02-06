@@ -23,6 +23,7 @@ export default function Home() {
             <p class="pb-1">$user.name Iwan Firmawan</p>
             <p class="pb-1">$user.email firmawaneiwan@gmail.com</p>
             <p class="pb-1">$user.github github.com/ifirmawan</p>
+            <p class="pb-1">$user.linkedin linkedin.com/in/iwanfmw</p>
           </div>
         </div>
       </div>
