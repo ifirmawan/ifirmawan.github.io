@@ -1,32 +1,89 @@
-import React from "react"
-import moment from "moment"
+import * as React from "react"
+import { Link, graphql } from "gatsby"
 
-export default function Home() {
+import Bio from "../components/bio"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+
+const BlogIndex = ({ data, location }) => {
+  const siteTitle = data.site.siteMetadata?.title || `Title`
+  const posts = data.allMarkdownRemark.nodes
+
+  if (posts.length === 0) {
+    return (
+      <Layout location={location} title={siteTitle}>
+        <SEO title="All posts" />
+        <Bio />
+        <p>
+          No blog posts found. Add markdown posts to "content/blog" (or the
+          directory you specified for the "gatsby-source-filesystem" plugin in
+          gatsby-config.js).
+        </p>
+      </Layout>
+    )
+  }
+
   return (
-    <div class="relative min-h-screen pt-28">
-      <div class="w-1/2 mx-auto">
-        <div class="w-full shadow-2xl subpixel-antialiased rounded h-64 bg-black border-black mx-auto">
-          <div class="flex items-center h-6 rounded-t bg-gray-100 border-b border-gray-500 text-center text-black" id="headerTerminal">
-            <div class="flex ml-2 items-center text-center border-red-900 bg-red-500 shadow-inner rounded-full w-3 h-3" id="closebtn">
-            </div>
-            <div class="ml-2 border-yellow-900 bg-yellow-500 shadow-inner rounded-full w-3 h-3" id="minbtn">
-            </div>
-            <div class="ml-2 border-green-900 bg-green-500 shadow-inner rounded-full w-3 h-3" id="maxbtn">
-            </div>
-            <div class="mx-auto pr-16" id="terminaltitle">
-              <p class="text-center text-sm">Terminal</p>
-            </div>
+    <Layout location={location} title={siteTitle}>
+      <SEO title="All posts" />
+      <Bio />
+      <ol style={{ listStyle: `none` }}>
+        {posts.map(post => {
+          const title = post.frontmatter.title || post.fields.slug
 
-          </div>
-          <div class="pl-1 pt-1 h-auto  text-green-200 font-mono text-xs bg-black" id="console">
-            <p class="pb-1">Last login: {moment().format('LLLL')} on ttys002</p>
-            <p class="pb-1">$user.name Iwan Firmawan</p>
-            <p class="pb-1">$user.email firmawaneiwan@gmail.com</p>
-            <p class="pb-1">$user.github github.com/ifirmawan</p>
-            <p class="pb-1">$user.linkedin linkedin.com/in/iwanfmw</p>
-          </div>
-        </div>
-      </div>
-    </div>
+          return (
+            <li key={post.fields.slug}>
+              <article
+                className="post-list-item"
+                itemScope
+                itemType="http://schema.org/Article"
+              >
+                <header>
+                  <h2>
+                    <Link to={post.fields.slug} itemProp="url">
+                      <span itemProp="headline">{title}</span>
+                    </Link>
+                  </h2>
+                  <small>{post.frontmatter.date}</small>
+                </header>
+                <section>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: post.frontmatter.description || post.excerpt,
+                    }}
+                    itemProp="description"
+                  />
+                </section>
+              </article>
+            </li>
+          )
+        })}
+      </ol>
+    </Layout>
   )
 }
+
+export default BlogIndex
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      nodes {
+        excerpt
+        fields {
+          slug
+        }
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+          description
+        }
+      }
+    }
+  }
+`
