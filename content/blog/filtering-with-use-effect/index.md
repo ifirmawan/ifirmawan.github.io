@@ -25,6 +25,7 @@ import React, { useEffect, useState } from 'react'
 const [products, setProducts] = useState(null);
 const [size, setSize] = useState(null);
 const [keyword, setKeyword] = useState(null);
+const [loading, setLoading] = useState(true); // Loading is true each page first load
 
 
 const handleOnFiltering = (size, keyword) => {
@@ -37,7 +38,15 @@ const handleOnFiltering = (size, keyword) => {
 }
 
 useEffect((){
-  handleOnFiltering(size, keyword);
+  /**
+   * KEEP IN MIND
+   * Please add conditional updating state to avoid memory leak caused loop forever then your server is down badly.
+   * In this case, I'm using loading to handle conditional updating products state.
+   **/
+  if (loading) {
+    setLoading(false);
+    handleOnFiltering(size, keyword);
+  }
 }, [size, keyword]); // Add size and keyword state as subscriptions
 ```
 
