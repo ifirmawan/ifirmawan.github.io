@@ -20,15 +20,7 @@ then you have filtering terms keyword and dropdown size.
 So, you can write useEffect like this 
 
 ```javascript
-import React, { useEffect, useState } from 'react';
-import items from '../json/products.json'; // json file as data dummy for example.
-
-const ProductPage = () => {
-  const [products, setProducts] = useState(items);
-  const [size, setSize] = useState(null);
-  const [keyword, setKeyword] = useState(null);
-  const [loading, setLoading] = useState(true); // Loading is true each page first load
-
+...
   const handleOnFiltering = (size, keyword) => {
     const p = [
       ...products.filter((p) => {
@@ -49,47 +41,11 @@ const ProductPage = () => {
       handleOnFiltering(size, keyword);
     }
   }, [loading, size, keyword]); // Add size and keyword state as subscriptions
-  
-  return (
-    <div>
-      <div>
-        <input
-          type="text"
-          value={keyword}
-          onChange={(e) => {
-            setLoading(true);
-            setKeyword(e.target.value);
-          }}
-        />
-        <select
-          onChange={(e) => {
-            setLoading(true);
-            setSize(e.target.value);
-          }}
-          value={size}
-        >
-          <option value="s">S</option>
-          <option value="m">M</option>
-          <option value="l">L</option>
-          <option value="xl">XL</option>
-        </select>
-      </div>
-      {loading
-        ? <>Loading...<>
-        : (
-          <ul>
-            {products.map((p, key) => <li key={key}>{p.name} | {p.price} | {p.description}</li>)}
-          </ul>
-        )
-      }
-    </div>
-  )
-}
-
-export default ProductPage;
-
+...
 ```
+You can find full source code here [ProductPage.jsx](https://gist.github.com/ifirmawan/2acf9bec2968c570788f2291fbef33c7)
 
+If you have any questions about this post, feel free to contact me on Twitter or via Email.
 ## Try it! 
 
 Good Luck :D
