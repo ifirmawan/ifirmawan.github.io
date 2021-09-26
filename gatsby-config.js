@@ -15,7 +15,7 @@ module.exports = {
     description: `Personal site that aims to share work and experiences while being a Programmer.`,
     siteUrl: `https://ifirmawan.github.io`,
     social: {
-      twitter: `iwan_false`,
+      twitter: `iwan_firmawan`,
     },
   },
   plugins: [
