@@ -1,4 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Iwan Firmawan]]></title><description><![CDATA[Personal site that aims to share work and experiences while being a Programmer.]]></description><link>https://ifirmawan.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 20 Sep 2021 01:44:45 GMT</lastBuildDate><item><title><![CDATA[Filtering with useEffect]]></title><description><![CDATA[Hello I’m so happy because today I’ve been understand what is subscriptions inside UseEffect Let me try to make simple filter functionality…]]></description><link>https://ifirmawan.github.io/filtering-with-use-effect/</link><guid isPermaLink="false">https://ifirmawan.github.io/filtering-with-use-effect/</guid><pubDate>Sun, 12 Sep 2021 13:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Hello&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Iwan Firmawan]]></title><description><![CDATA[Personal site that aims to share work and experiences while being a Programmer.]]></description><link>https://ifirmawan.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 26 Sep 2021 10:34:07 GMT</lastBuildDate><item><title><![CDATA[Docker Volume for PostgreSQL]]></title><description><![CDATA[Hi there! Welcome back, have you ever had issue like this? when you try to creating docker-compose containing PostgreSQL service.
+But if you…]]></description><link>https://ifirmawan.github.io/docker-volume-for-postgresql/</link><guid isPermaLink="false">https://ifirmawan.github.io/docker-volume-for-postgresql/</guid><pubDate>Sun, 26 Sep 2021 13:00:00 GMT</pubDate><content:encoded>&lt;h3&gt;Hi there!&lt;/h3&gt;
+&lt;p&gt;Welcome back, have you ever had issue like this?&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;docker initdb: error: directory &lt;span class=&quot;token string&quot;&gt;&quot;/var/lib/postgresql/data&quot;&lt;/span&gt; exists but is not empty&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;when you try to creating docker-compose containing PostgreSQL service.
+But if you haven’t then you can mark this issue for reference.&lt;/p&gt;
+&lt;p&gt;This issue arises when I was adding &lt;em&gt;.gitignore&lt;/em&gt; at docker volume pg-data with the project structure as follows&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;- apps/
+- nginx/
+-- app.conf
+- pg-data/
+-- .gitignore (here)
+docker-compose.yml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Actually, the short solution is replace current volume with the new one. eg:
+from &lt;code class=&quot;language-text&quot;&gt;- pg-data/&lt;/code&gt; to &lt;code class=&quot;language-text&quot;&gt;- postgres-data/&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;But I think is not cool, because you have more effort to remove and created in many times as long as that issue is exists.&lt;/p&gt;
+&lt;p&gt;Long story short, I have brilliant solution (maybe not for you. because i’m a newbie) and very simple.
+You only need to remove completely &lt;code class=&quot;language-text&quot;&gt;- pg-data/&lt;/code&gt; from project structure and define pg-data volume at &lt;strong&gt;docker-compose.yml&lt;/strong&gt; like this.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;docker&quot;&gt;&lt;pre class=&quot;language-docker&quot;&gt;&lt;code class=&quot;language-docker&quot;&gt;  &lt;span class=&quot;token comment&quot;&gt;# Postgres&lt;/span&gt;
+  database&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    image&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; postgres
+    restart&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; unless&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;stopped
+    tty&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; true
+    ports&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; 5432&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;5432
+    environment&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+      POSTGRES_PASSWORD&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; postgres
+      POSTGRES_USER&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; postgres
+      POSTGRES_DB&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; laravel
+    volumes&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; pg&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;/var/lib/postgresql/data
+    networks&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; backend
+
+&lt;span class=&quot;token punctuation&quot;&gt;...&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;# Volumes&lt;/span&gt;
+volumes&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  pg&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After that, you can try to rebuild your docker container.&lt;/p&gt;
+&lt;h3&gt;Final Project structure&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;- apps/
+- nginx/
+-- app.conf
+docker-compose.yml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you have any questions about this post, feel free to contact me on Twitter or via Email.
+Thank you&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Filtering with useEffect]]></title><description><![CDATA[Hello I’m so happy because today I’ve been understand what is subscriptions inside UseEffect Let me try to make simple filter functionality…]]></description><link>https://ifirmawan.github.io/filtering-with-use-effect/</link><guid isPermaLink="false">https://ifirmawan.github.io/filtering-with-use-effect/</guid><pubDate>Sun, 12 Sep 2021 13:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;Hello&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;I’m so happy because today I’ve been understand what is subscriptions inside UseEffect&lt;/p&gt;
 &lt;/blockquote&gt;
