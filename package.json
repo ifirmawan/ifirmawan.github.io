@@ -32,7 +32,7 @@
     "gatsby-remark-responsive-iframe": "^4.0.0",
     "gatsby-remark-smartypants": "^4.0.0",
     "gatsby-source-filesystem": "^3.3.0",
-    "gatsby-transformer-remark": "^4.0.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^3.3.0",
     "moment": "^2.29.1",
     "postcss": "^8.2.4",
