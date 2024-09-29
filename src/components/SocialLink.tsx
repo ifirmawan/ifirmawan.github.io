@@ -12,7 +12,7 @@ const SocialLink: React.FC<{
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-gray-400 hover:text-gray-500"
+      className="w-6 text-gray-400 hover:text-gray-500"
     >
       <span className="sr-only">{text}</span>
       <Icons name={icon} />
