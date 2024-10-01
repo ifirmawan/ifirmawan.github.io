@@ -89,3 +89,10 @@ export const socialItems: { url: string; text: string; icon: IconKey }[] = [
     icon: "dribbble",
   },
 ];
+
+export const profile = {
+  name: "Iwan Firmawan",
+  title: "Full-stack Web Developer from Purbalingga, ID",
+  subtitle: "Enabling efficient and user-friendly web solutions",
+  email: "mail@iwanfirmawan.my.id",
+};
