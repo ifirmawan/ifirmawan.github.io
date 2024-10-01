@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ubuntu.className} w-full h-screen px-6 md:px-12 lg:px-24`}>
-        <main className="flex flex-col items-center justify-between pt-24">
+        <main className="flex flex-col items-center justify-between pt-16">
           {children}
         </main>
         <footer className="flex flex-col items-center justify-between">

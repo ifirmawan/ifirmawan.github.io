@@ -25,7 +25,7 @@ const DefaultTemplate: React.FC<Props> = ({ children }) => {
         />
         <div className="space-y-3">
           <h3 className="font-bold">RECENT PROJECTS</h3>
-          <ul className="ml-4 list-[square] marker:text-purple-600 space-y-1">
+          <ul className="marker:text-purple-600 space-y-2">
             {projects
               .sort((a, b) => b.id - a.id)
               .map(({ is_private: isPrivate, ...p }) => (
