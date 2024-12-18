@@ -15,10 +15,12 @@ type Props = {
 
 const DefaultTemplate: React.FC<Props> = ({ children }) => {
   return (
-    <div className="w-full h-auto md:h-screen max-w-6xl flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 relative overflow-y-hidden">
-      <div className="w-full md:w-3/4 p-8 overflow-y-scroll">{children}</div>
+    <div className="w-full h-auto md:h-screen flex flex-col md:flex-row items-center justify-between">
+      <div className="w-full md:w-3/4 px-8">
+        {children}
+      </div>
       <aside
-        className={`${ubuntu.className} w-full h-auto xl:h-screen space-y-12 md:w-1/4 pt-16 px-8 md:px-4 lg:px-6 border-l border-l-zinc-300 relative`}
+        className={`${ubuntu.className} w-full h-auto xl:h-screen space-y-12 md:w-1/4 pt-16 px-8 md:px-4 lg:px-6 border-l-0 md:border-l border-l-zinc-300 relative`}
       >
         <Link href={"/"}>
           <Image
@@ -64,7 +66,7 @@ const DefaultTemplate: React.FC<Props> = ({ children }) => {
             ))}
           </div>
         </div>
-        <div className="w-full pb-4 flex gap-1 text-xs opacity-35 relative xl:absolute xl:bottom-0 xl:left-8">
+        <div className="w-full pb-4 flex flex-col lg:flex-row gap-1 text-xs opacity-35 relative xl:absolute xl:bottom-0 xl:left-8">
           <i>inspired by</i>
           <a
             href="https://dribbble.com/shots/13490584-Webflow?utm_source=Clipboard_Shot&utm_campaign=moynihan&utm_content=Webflow&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=moynihan&utm_content=Webflow&utm_medium=Social_Share"

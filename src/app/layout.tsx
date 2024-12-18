@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${plusJakarta.className}`}>
-        <main className="w-full flex flex-col items-center justify-start">
+        <main className="container mx-auto px-4">
           {children}
         </main>
       </body>
