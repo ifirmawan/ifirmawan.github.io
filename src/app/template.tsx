@@ -33,7 +33,7 @@ const DefaultTemplate: React.FC<Props> = ({ children }) => {
           <h3 className="font-bold">RECENT PROJECTS</h3>
           <ul className="marker:text-purple-600 space-y-2">
             {projects
-              .sort((a, b) => b.id - a.id)
+              .sort((a, b) => Number(b.id) - Number(a.id))
               .map(({ is_private: isPrivate, ...p }) => (
                 <li key={p.id} className="font-medium text-sm">
                   {isPrivate ? (
