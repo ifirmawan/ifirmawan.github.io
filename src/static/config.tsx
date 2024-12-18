@@ -92,7 +92,7 @@ export const socialItems: { url: string; text: string; icon: IconKey }[] = [
 
 export const profile = {
   name: "Iwan Firmawan",
-  title: "Full-stack Web Developer from Purbalingga, ID",
+  title: "Full-stack Web Developer from Purbalingga 🇮🇩",
   subtitle: "Enabling efficient and user-friendly web solutions",
   email: "mail@iwanfirmawan.my.id",
 };

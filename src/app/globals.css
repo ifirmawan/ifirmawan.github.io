@@ -35,3 +35,7 @@ body {
     text-wrap: balance;
   }
 }
+
+ol {
+  list-style-type: decimal;
+}
